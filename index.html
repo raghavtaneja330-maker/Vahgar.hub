@@ -154,7 +154,6 @@ footer{
 }
 </style>
 </head>
-
 <body>
 
 <section class="hero">
@@ -201,8 +200,7 @@ footer{
     <button type="submit" class="btn">Order via Email</button>
   </form>
 
-  <button class="btn" style="margin-top:10px;background:#25D366"
-  onclick="orderWhatsApp()">Order via WhatsApp</button>
+  <button class="btn" style="margin-top:10px;background:#25D366" onclick="orderWhatsApp()">Order via WhatsApp</button>
 </div>
 
 <footer>
@@ -210,7 +208,7 @@ Contact: raghav.taneja330@gmail.com
 </footer>
 
 <script>
-let cart=[];
+var cart=[];
 
 function scrollToProducts(){
   document.getElementById("products").scrollIntoView({behavior:"smooth"});
@@ -221,75 +219,58 @@ function toggleCart(){
 }
 
 function addToCart(){
-  let color=document.getElementById("color").value;
-  let qty=parseInt(document.getElementById("qty").value);
-  let price=490;
-
-  cart.push({name:"Japanese Pant",color,qty,price});
+  var color=document.getElementById("color").value;
+  var qty=parseInt(document.getElementById("qty").value);
+  var price=490;
+  cart.push({name:"Japanese Pant",color:color,qty:qty,price:price});
   renderCart();
   toggleCart();
 }
 
 function renderCart(){
-  let div=document.getElementById("cart-items");
+  var div=document.getElementById("cart-items");
   div.innerHTML="";
-  let total=0;
+  var total=0;
 
-  cart.forEach(item=>{
-    let itemTotal=item.price*item.qty;
-    total+=itemTotal;
-
-    div.innerHTML+=`
-      <div class="cart-item">
-        <span>${item.name} (${item.color}) x${item.qty}</span>
-        <span>₹${itemTotal}</span>
-      </div>
-    `;
+  cart.forEach(function(item){
+    var itemTotal = item.price * item.qty;
+    total += itemTotal;
+    div.innerHTML += '<div class="cart-item">' +
+      '<span>' + item.name + ' (' + item.color + ') x' + item.qty + '</span>' +
+      '<span>₹' + itemTotal + '</span>' +
+    '</div>';
   });
 
-  document.getElementById("total").innerText=total;
+  document.getElementById("total").innerText = total;
 }
 
 function placeOrder(e){
   e.preventDefault();
+  if(cart.length===0){ alert("Cart is empty!"); return; }
 
-  if(cart.length===0){
-    alert("Cart is empty!");
-    return;
-  }
+  var name = document.getElementById("name").value;
+  var mobile = document.getElementById("mobile").value;
+  var total = document.getElementById("total").innerText;
 
-  let name=document.getElementById("name").value;
-  let mobile=document.getElementById("mobile").value;
-  let total=document.getElementById("total").innerText;
+  var items = cart.map(function(i){
+    return i.name + ' (' + i.color + ') x' + i.qty + ' - ₹' + (i.price*i.qty);
+  }).join("\n");
 
-  let items=cart.map(i=>
-    `${i.name} (${i.color}) x${i.qty} - ₹${i.price*i.qty}`
-  ).join("\n");
+  var body = 'Customer Name: ' + name + '\nMobile: ' + mobile + '\n\nItems:\n' + items + '\n\nTotal: ₹' + total;
 
-  let body=`Customer Name: ${name}\nMobile: ${mobile}\n\nItems:\n${items}\n\nTotal: ₹${total}`;
-
-  window.location.href =
-  `mailto:raghav.taneja330@gmail.com?subject=New Order from Vahgar Hub&body=${encodeURIComponent(body)}`;
+  window.location.href = 'mailto:raghav.taneja330@gmail.com?subject=New Order from vahgar hub&body=' + encodeURIComponent(body);
 }
 
 function orderWhatsApp(){
-  if(cart.length===0){
-    alert("Cart is empty!");
-    return;
-  }
+  if(cart.length===0){ alert("Cart is empty!"); return; }
 
-  let total=document.getElementById("total").innerText;
+  var total=document.getElementById("total").innerText;
+  var items = cart.map(function(i){
+    return i.name + ' (' + i.color + ') x' + i.qty + ' - ₹' + (i.price*i.qty);
+  }).join("\n");
 
-  let items=cart.map(i=>
-    `${i.name} (${i.color}) x${i.qty} - ₹${i.price*i.qty}`
-  ).join("\n");
-
-  let message=`New Order from Vahgar Hub\n\n${items}\n\nTotal: ₹${total}`;
-
-  window.open(
-    `https://wa.me/919368388707?text=${encodeURIComponent(message)}`,
-    "_blank"
-  );
+  var message = 'New Order from vahgar hub\n\n' + items + '\n\nTotal: ₹' + total;
+  window.open('https://wa.me/919368388707?text=' + encodeURIComponent(message), "_blank");
 }
 </script>
 
