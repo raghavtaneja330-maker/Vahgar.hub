@@ -3,275 +3,267 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vahgar Hub</title>
+<title>Elite Fashion Store</title>
 
 <style>
-:root{
-  --accent:#ff4d4d;
-  --light:#f4f4f4;
-}
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family: 'Segoe UI', sans-serif;
-}
-
 body{
-  background:#fff;
-  color:#222;
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f4f4f4;
+}
+
+/* HEADER */
+header{
+    background:#111;
+    color:white;
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+header h1{margin:0;}
+nav a{
+    color:white;
+    margin-left:20px;
+    text-decoration:none;
+}
+.search-box input{
+    padding:6px;
 }
 
 /* HERO */
 .hero{
-  height:100vh;
-  background:url("https://images.unsplash.com/photo-1521334884684-d80222895322?q=80&w=1600&auto=format&fit=crop") center/cover no-repeat;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  color:#fff;
-  position:relative;
+    background:#222;
+    color:white;
+    text-align:center;
+    padding:60px 20px;
+    font-size:32px;
 }
 
-.hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,0.6);
+/* CONTAINER */
+.container{
+    padding:30px;
 }
 
-.hero-content{
-  position:relative;
-  z-index:2;
+/* CATEGORY FILTER */
+.filters button{
+    padding:8px 15px;
+    margin:5px;
+    border:none;
+    background:#111;
+    color:white;
+    cursor:pointer;
 }
 
-.hero h1{
-  font-size:2.5rem;
-}
-
-.hero p{
-  margin:15px 0;
-}
-
-.btn{
-  padding:12px 25px;
-  background:var(--accent);
-  color:#fff;
-  border:none;
-  border-radius:30px;
-  cursor:pointer;
-  font-weight:bold;
-}
-
+/* PRODUCTS */
 .products{
-  padding:40px 20px;
-  background:var(--light);
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
 }
-
-.products h2{
-  text-align:center;
-  margin-bottom:25px;
+.product{
+    background:white;
+    padding:15px;
+    border-radius:8px;
+    box-shadow:0 4px 8px rgba(0,0,0,0.1);
+    text-align:center;
 }
-
-.product-card{
-  background:#fff;
-  padding:15px;
-  border-radius:12px;
-  box-shadow:0 10px 20px rgba(0,0,0,0.08);
+.product img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+    border-radius:8px;
 }
-
-.product-card img{
-  width:100%;
-  border-radius:10px;
-}
-
 .price{
-  color:var(--accent);
-  font-weight:bold;
-  margin:10px 0;
+    color:green;
+    font-weight:bold;
+}
+button{
+    padding:8px 15px;
+    border:none;
+    background:#111;
+    color:white;
+    cursor:pointer;
+    border-radius:5px;
+}
+button:hover{
+    background:#444;
 }
 
-.select-group{
-  display:flex;
-  gap:10px;
-  margin-bottom:10px;
-}
-
-select, input{
-  padding:8px;
-  width:100%;
-  border-radius:6px;
-  border:1px solid #ccc;
-}
-
-.cart-icon{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:var(--accent);
-  color:#fff;
-  padding:15px;
-  border-radius:50%;
-  cursor:pointer;
-}
-
+/* CART */
 .cart{
-  position:fixed;
-  right:-100%;
-  top:0;
-  height:100%;
-  width:100%;
-  max-width:400px;
-  background:#fff;
-  padding:20px;
-  transition:0.4s;
-  overflow-y:auto;
-  box-shadow:-5px 0 20px rgba(0,0,0,0.2);
+    position:fixed;
+    right:0;
+    top:0;
+    width:300px;
+    height:100%;
+    background:white;
+    box-shadow:-3px 0 8px rgba(0,0,0,0.2);
+    padding:20px;
+    overflow:auto;
+    display:none;
 }
-
-.cart.active{
-  right:0;
-}
-
+.cart h2{text-align:center;}
 .cart-item{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:8px;
+    border-bottom:1px solid #ddd;
+    padding:10px 0;
+}
+.cart-total{
+    font-weight:bold;
+    margin-top:10px;
 }
 
-.total{
-  font-weight:bold;
-  margin:15px 0;
+/* ADMIN */
+.admin{
+    background:#fff;
+    padding:20px;
+    margin-top:40px;
+    border-radius:10px;
+}
+.admin input, .admin select{
+    width:100%;
+    padding:8px;
+    margin:5px 0;
 }
 
 footer{
-  text-align:center;
-  padding:15px;
-  background:#111;
-  color:#fff;
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:20px;
+    margin-top:40px;
 }
 </style>
 </head>
+
 <body>
 
-<section class="hero">
-  <div class="hero-content">
-    <h1>vahgar hub</h1>
-    <p>fresh find, best prices, fashion</p>
-    <button class="btn" onclick="scrollToProducts()">Shop Now</button>
-  </div>
-</section>
+<header>
+    <h1>Elite Fashion Store</h1>
+    <div>
+        <input type="text" id="search" placeholder="Search products..." onkeyup="searchProducts()">
+        <button onclick="toggleCart()">Cart (<span id="cart-count">0</span>)</button>
+    </div>
+</header>
 
-<section class="products" id="products">
-  <h2>Japanese Pant Collection</h2>
+<div class="hero">
+    New Collection 2026
+</div>
 
-  <div class="product-card">
-    <img src="https://i.imgur.com/8Km9tLL.jpg" alt="Japanese Pant">
-    <h3>Japanese Pant</h3>
-    <p class="price">₹490</p>
+<div class="container">
 
-    <div class="select-group">
-      <select id="color">
-        <option value="Black">Black</option>
-        <option value="Brown">Brown</option>
-        <option value="Beige">Beige</option>
-        <option value="Grey">Grey</option>
-      </select>
-
-      <input type="number" id="qty" value="1" min="1">
+    <div class="filters">
+        <button onclick="filterCategory('All')">All</button>
+        <button onclick="filterCategory('Men')">Men</button>
+        <button onclick="filterCategory('Women')">Women</button>
+        <button onclick="filterCategory('Kids')">Kids</button>
     </div>
 
-    <button class="btn" onclick="addToCart()">Add to Cart</button>
-  </div>
-</section>
+    <div class="products" id="product-list"></div>
 
-<div class="cart-icon" onclick="toggleCart()">🛒</div>
+    <!-- ADMIN PANEL -->
+    <div class="admin">
+        <h2>Add New Product</h2>
+        <input type="text" id="pname" placeholder="Product Name">
+        <input type="text" id="pimage" placeholder="Image URL">
+        <input type="number" id="pprice" placeholder="Price">
+        <select id="pcategory">
+            <option>Men</option>
+            <option>Women</option>
+            <option>Kids</option>
+        </select>
+        <button onclick="addProduct()">Add Product</button>
+    </div>
 
-<div class="cart" id="cartPanel">
-  <h3>Your Cart</h3>
-  <div id="cart-items"></div>
-  <div class="total">Total: ₹<span id="total">0</span></div>
+</div>
 
-  <form onsubmit="placeOrder(event)">
-    <input type="text" id="name" placeholder="Customer Name" required>
-    <input type="tel" id="mobile" placeholder="Mobile Number" required>
-    <button type="submit" class="btn">Order via Email</button>
-  </form>
-
-  <button class="btn" style="margin-top:10px;background:#25D366" onclick="orderWhatsApp()">Order via WhatsApp</button>
+<!-- CART -->
+<div class="cart" id="cart">
+    <h2>Your Cart</h2>
+    <div id="cart-items"></div>
+    <p class="cart-total">Total: $<span id="total">0</span></p>
+    <button onclick="checkout()">Checkout via WhatsApp</button>
 </div>
 
 <footer>
-Contact: raghav.taneja330@gmail.com
+    © 2026 Elite Fashion Store | Phone: +123456789 | Email: your@email.com
 </footer>
 
 <script>
-var cart=[];
+let products = [
+    {name:"Men T-Shirt", price:25, category:"Men", image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab"},
+    {name:"Women Dress", price:45, category:"Women", image:"https://images.unsplash.com/photo-1490481651871-ab68de25d43d"},
+    {name:"Kids Jacket", price:35, category:"Kids", image:"https://images.unsplash.com/photo-1512436991641-6745cdb1723f"}
+];
 
-function scrollToProducts(){
-  document.getElementById("products").scrollIntoView({behavior:"smooth"});
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function displayProducts(list){
+    let output="";
+    list.forEach((p,index)=>{
+        output+=`
+        <div class="product">
+            <img src="${p.image}">
+            <h3>${p.name}</h3>
+            <p class="price">$${p.price}</p>
+            <button onclick="addToCart(${index})">Add to Cart</button>
+        </div>`;
+    });
+    document.getElementById("product-list").innerHTML=output;
+}
+
+function addProduct(){
+    let name=document.getElementById("pname").value;
+    let image=document.getElementById("pimage").value;
+    let price=document.getElementById("pprice").value;
+    let category=document.getElementById("pcategory").value;
+    products.push({name,price,category,image});
+    displayProducts(products);
+}
+
+function filterCategory(cat){
+    if(cat=="All") displayProducts(products);
+    else displayProducts(products.filter(p=>p.category==cat));
+}
+
+function searchProducts(){
+    let value=document.getElementById("search").value.toLowerCase();
+    displayProducts(products.filter(p=>p.name.toLowerCase().includes(value)));
+}
+
+function addToCart(index){
+    cart.push(products[index]);
+    localStorage.setItem("cart",JSON.stringify(cart));
+    updateCart();
+}
+
+function updateCart(){
+    let items="";
+    let total=0;
+    cart.forEach(item=>{
+        total+=Number(item.price);
+        items+=`<div class="cart-item">${item.name} - $${item.price}</div>`;
+    });
+    document.getElementById("cart-items").innerHTML=items;
+    document.getElementById("total").innerText=total;
+    document.getElementById("cart-count").innerText=cart.length;
 }
 
 function toggleCart(){
-  document.getElementById("cartPanel").classList.toggle("active");
+    let cartDiv=document.getElementById("cart");
+    cartDiv.style.display = cartDiv.style.display=="block"?"none":"block";
 }
 
-function addToCart(){
-  var color=document.getElementById("color").value;
-  var qty=parseInt(document.getElementById("qty").value);
-  var price=490;
-  cart.push({name:"Japanese Pant",color:color,qty:qty,price:price});
-  renderCart();
-  toggleCart();
+function checkout(){
+    let message="Order Details:%0A";
+    cart.forEach(item=>{
+        message+=item.name+" - $"+item.price+"%0A";
+    });
+    window.open("https://wa.me/123456789?text="+message);
 }
 
-function renderCart(){
-  var div=document.getElementById("cart-items");
-  div.innerHTML="";
-  var total=0;
-
-  cart.forEach(function(item){
-    var itemTotal = item.price * item.qty;
-    total += itemTotal;
-    div.innerHTML += '<div class="cart-item">' +
-      '<span>' + item.name + ' (' + item.color + ') x' + item.qty + '</span>' +
-      '<span>₹' + itemTotal + '</span>' +
-    '</div>';
-  });
-
-  document.getElementById("total").innerText = total;
-}
-
-function placeOrder(e){
-  e.preventDefault();
-  if(cart.length===0){ alert("Cart is empty!"); return; }
-
-  var name = document.getElementById("name").value;
-  var mobile = document.getElementById("mobile").value;
-  var total = document.getElementById("total").innerText;
-
-  var items = cart.map(function(i){
-    return i.name + ' (' + i.color + ') x' + i.qty + ' - ₹' + (i.price*i.qty);
-  }).join("\n");
-
-  var body = 'Customer Name: ' + name + '\nMobile: ' + mobile + '\n\nItems:\n' + items + '\n\nTotal: ₹' + total;
-
-  window.location.href = 'mailto:raghav.taneja330@gmail.com?subject=New Order from vahgar hub&body=' + encodeURIComponent(body);
-}
-
-function orderWhatsApp(){
-  if(cart.length===0){ alert("Cart is empty!"); return; }
-
-  var total=document.getElementById("total").innerText;
-  var items = cart.map(function(i){
-    return i.name + ' (' + i.color + ') x' + i.qty + ' - ₹' + (i.price*i.qty);
-  }).join("\n");
-
-  var message = 'New Order from vahgar hub\n\n' + items + '\n\nTotal: ₹' + total;
-  window.open('https://wa.me/919368388707?text=' + encodeURIComponent(message), "_blank");
-}
+displayProducts(products);
+updateCart();
 </script>
 
 </body>
